@@ -17,6 +17,7 @@
         android:hint="@string/composeHint"
         android:inputType="textMultiLine"
         android:minLines="5"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,4 +32,15 @@
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCompose" />
+
+    <TextView
+        android:id="@+id/tvTextCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/btnTweet"
+        app:layout_constraintTop_toBottomOf="@+id/etCompose"
+        tools:text="140" />
 </android.support.constraint.ConstraintLayout>

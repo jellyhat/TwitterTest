@@ -1,13 +1,17 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -20,17 +24,43 @@ import org.parceler.Parcels;
 
 import cz.msebera.android.httpclient.Header;
 
-public class composeActivity extends AppCompatActivity {
+public class composeActivity extends AppCompatActivity{
 
     public static final int MAX_TWEET_LENGTH = 140;
     private EditText etCompose;
+    private TextView tvTextCount;
     private Button btnTweet;
     private TwitterClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
-        etCompose = findViewById(R.id.etCompose);
+        tvTextCount = findViewById(R.id.tvTextCount);
+        tvTextCount.setText("140");
+        etCompose = (EditText) findViewById(R.id.etCompose);
+        etCompose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int newone = 140 - (s.length());
+                if(newone > 140){
+                    tvTextCount.setTextColor(Color.RED);
+                }
+                else{
+                    tvTextCount.setTextColor(Color.GRAY);
+                }
+                tvTextCount.setText(newone+ "");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         btnTweet = findViewById(R.id.btnTweet);
         client = TwitterApp.getRestClient(this);
         btnTweet.setOnClickListener(new View.OnClickListener(){
